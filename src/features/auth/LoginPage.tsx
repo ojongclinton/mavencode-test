@@ -31,7 +31,6 @@ const LoginPage = () => {
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-4 sm:mx-auto">
         <div className="text-center mb-6">
           <FaUserAlt className="mx-auto text-blue-600 text-4xl mb-3" />{" "}
-          {/* User icon */}
           <h1 className="text-3xl font-bold text-gray-800">Sign In</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-5">
