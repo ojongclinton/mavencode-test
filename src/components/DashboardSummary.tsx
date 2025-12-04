@@ -54,7 +54,7 @@ const DashboardStatsSummaries = () => {
         </div>
       </div>
       {!isLoading && (
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {new_tickets && (
             <SingleSummaryCard
               code={new_tickets.code}
@@ -106,7 +106,7 @@ const DashboardStatsSummaries = () => {
         </div>
       )}
       {isLoading && (
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {[...Array(6)].map((_, i) => (
             <div
               key={i}

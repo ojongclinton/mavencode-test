@@ -51,13 +51,13 @@ export const DevelopmentActivity = () => {
                 <th className="text-sm font-normal text-left py-2 text-gray-500 px-4">
                   USER
                 </th>
-                <th className="text-sm font-normal text-left py-2 text-gray-500">
+                <th className="text-sm font-normal text-left py-2 text-gray-500 hidden md:block">
                   COMMIT
                 </th>
                 <th className="text-sm font-normal text-left py-2 text-gray-500">
                   DATE
                 </th>
-                <th className="text-sm font-normal text-left py-2 px-4"></th>
+                <th className="text-sm font-normal text-left py-2 px-4 hidden md:block"></th>
               </tr>
             </thead>
 
@@ -74,9 +74,9 @@ export const DevelopmentActivity = () => {
                         <p className="text-gray-600">{u.name}</p>
                       </div>
                     </td>
-                    <td className="py-2 text-gray-600">{u.commit}</td>
+                    <td className="py-2 text-gray-600 hidden md:block">{u.commit}</td>
                     <td className="py-2 text-gray-600">{u.date}</td>
-                    <td className="py-2 px-4">
+                    <td className="mt-5 px-4 hidden md:block">
                       <FiTrash className="text-gray-400" />
                     </td>
                   </tr>
@@ -92,13 +92,13 @@ export const DevelopmentActivity = () => {
                 <th className="text-sm font-normal text-left py-2 text-gray-500 px-4">
                   USER
                 </th>
-                <th className="text-sm font-normal text-left py-2 text-gray-500">
+                <th className="text-sm font-normal text-left py-2 text-gray-500 hidden md:visible">
                   COMMIT
                 </th>
                 <th className="text-sm font-normal text-left py-2 text-gray-500">
                   DATE
                 </th>
-                <th className="text-sm font-normal text-left py-2 px-4"></th>
+                <th className="text-sm font-normal text-left py-2 px-4 hidden md:visible"></th>
               </tr>
             </thead>
 
@@ -112,7 +112,7 @@ export const DevelopmentActivity = () => {
                     </div>
                   </td>
 
-                  <td className="py-4">
+                  <td className="py-4 hidden md:visible">
                     <div className="h-4 w-32 bg-gray-200 rounded"></div>
                   </td>
 
@@ -120,7 +120,7 @@ export const DevelopmentActivity = () => {
                     <div className="h-4 w-20 bg-gray-200 rounded"></div>
                   </td>
 
-                  <td className="px-4 py-4">
+                  <td className="px-4 py-4 hidden md:visible">
                     <div className="h-4 w-4 bg-gray-200 rounded"></div>
                   </td>
                 </tr>
@@ -148,7 +148,7 @@ export const PieCharts = () => {
           code samples
         </p>
       </div>
-      <div className="grid grid-cols-2 my-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 my-3 gap-5">
         <div className="bg-white border border-gray-200">
           <div className="border-b border-gray-200 p-3">
             <p>Chart Title</p>
