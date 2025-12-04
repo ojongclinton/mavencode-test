@@ -11,8 +11,8 @@ const LoginPage = () => {
     (state) => state.auth
   );
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("user123@gmail.com");
+  const [password, setPassword] = useState("user123");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const LoginPage = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Email Address
+              Email Address (user123@gmail.com)
             </label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -61,7 +61,7 @@ const LoginPage = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Password
+              Password (user123)
             </label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
