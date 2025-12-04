@@ -1,56 +1,14 @@
-import { useState } from "react";
 import InitialsAvatar from "./InitialsAvatar";
 import UserNotifications from "./Notifications";
 import { FaTerminal } from "react-icons/fa";
-import { classNames } from "../helpers";
-import {
-  FiBox,
-  FiCalendar,
-  FiCheckSquare,
-  FiHome,
-  FiImage,
-} from "react-icons/fi";
-import { HiOutlineDocument } from "react-icons/hi2";
-import { IoDocumentTextOutline } from "react-icons/io5";
 import { useAppSelector } from "../app/hooks";
-
-const dashBoardTabs = [
-  {
-    title: "Home",
-    icon: FiHome,
-  },
-  {
-    title: "Interface",
-    icon: FiBox,
-  },
-  {
-    title: "Components",
-    icon: FiCalendar,
-  },
-  {
-    title: "Pages",
-    icon: HiOutlineDocument,
-  },
-  {
-    title: "Forms",
-    icon: FiCheckSquare,
-  },
-  {
-    title: "Gallery",
-    icon: FiImage,
-  },
-  {
-    title: "Documentation",
-    icon: IoDocumentTextOutline,
-  },
-];
 
 function TopAppBar() {
   const user = useAppSelector((state) => state.auth.user);
-  const [activeTab, setActiveTab] = useState(dashBoardTabs[0]);
+  
 
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       <div className="p-4 flex justify-between items-center border-b border-gray-200">
         <div>
           <div className="flex items-center gap-2">
@@ -81,42 +39,10 @@ function TopAppBar() {
           </div>
         </div>
       </div>
-      <div className="px-4 flex justify-between items-center border-b border-gray-200">
-        <DashboardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      </div>
+
     </div>
   );
 }
 
 export default TopAppBar;
 
-const DashboardTabs = ({
-  setActiveTab,
-  activeTab,
-}: {
-  activeTab: { title: string; icon: any };
-  setActiveTab: (v: { title: string; icon: any }) => void;
-}) => {
-  return (
-    <div className="flex gap-6">
-      {dashBoardTabs.map((t) => {
-        let isActive = activeTab.title === t.title;
-        return (
-          <p
-            onClick={() => {
-              setActiveTab(t);
-            }}
-            className={classNames(
-              isActive
-                ? "border-b border-[#4B87ED] text-[#4B87ED]"
-                : " text-gray-400 hover:text-[#4B87ED] transition-colors duration-300",
-              "py-4 text-sm flex items-center gap-[2px] cursor-pointer"
-            )}
-          >
-            <t.icon /> {t.title}
-          </p>
-        );
-      })}
-    </div>
-  );
-};

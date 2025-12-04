@@ -1,28 +1,16 @@
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from "recharts";
 
 
-const developmentActivityData = [
-  { name: "Jan", Purchases: 100 },
-  { name: "Feb", Purchases: 350 },
-  { name: "Mar", Purchases: 50 },
-  { name: "Apr", Purchases: 130 },
-  { name: "May", Purchases: 900 },
-  { name: "Jun", Purchases: 230 },
-  { name: "Jul", Purchases: 750 },
-  { name: "Aug", Purchases: 490 },
-  { name: "Sep", Purchases: 800 },
-  { name: "Oct", Purchases: 944 },
-  { name: "Nov", Purchases: 1300 },
-  { name: "Dec", Purchases: 1050 },
-];
 
-// --- The React Component ---
-const TablerMinimalLineChart = () => {
+
+const TablerMinimalLineChart = ({chartData}:{
+  chartData:{name:string;Purchases:number}[]
+}) => {
   return (
     <div style={{ width: "100%", height: 180 }}>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
-          data={developmentActivityData}
+          data={chartData}
           margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
         >
           <defs>
