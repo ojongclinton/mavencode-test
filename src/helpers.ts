@@ -1,8 +1,8 @@
-export function classNames(...classes) {
+export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function percentageChange(prev, current) {
+export function percentageChange(prev: number, current: number) {
   if (prev === 0) return current === 0 ? "0%" : "+∞";
 
   const change = ((current - prev) / prev) * 100;
@@ -13,7 +13,10 @@ export function percentageChange(prev, current) {
   return `${sign}${formatted}%`;
 }
 
-export function formatNumber(value, options = {}) {
+export function formatNumber(
+  value:number,
+  options: { prefix?: string; decimals?: number } = {}
+) {
   const { prefix = "", decimals = 1 } = options;
 
   let formatted = value;

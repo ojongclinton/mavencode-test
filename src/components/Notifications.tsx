@@ -80,7 +80,7 @@ const UserNotifications = () => {
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
-  const markAsRead = (id) => {
+  const markAsRead = (id:number) => {
     setNotifications(
       notifications.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
@@ -90,7 +90,7 @@ const UserNotifications = () => {
     setNotifications(notifications.map((n) => ({ ...n, read: true })));
   };
 
-  const deleteNotification = (id) => {
+  const deleteNotification = (id:number) => {
     setNotifications(notifications.filter((n) => n.id !== id));
   };
 
