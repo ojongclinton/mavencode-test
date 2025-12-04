@@ -65,10 +65,16 @@ const dashboardSlice = createSlice({
   reducers: {
     dahsboardAllRequest: (state) => {
       state.loading = true;
+      state.graphsStats.loading = true;
+      state.lineChart.loading = true;
+      state.summaryStats.loading = true;
     },
 
     dashboardAllRequestSuccess: (state) => {
       state.loading = false;
+      state.graphsStats.loading = false;
+      state.lineChart.loading = false;
+      state.summaryStats.loading = false;
     },
 
     //Summary stats
