@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { CommitActivity, LineChartItem } from "./types";
 
 interface DashboardSlice {
   loading: boolean;
@@ -11,7 +12,19 @@ interface DashboardSlice {
   };
 
   graphsStats: {
-    data: any;
+    data: {
+      pieChart:any;
+      doughnutChart:any;
+    }
+    loading: boolean;
+    error: boolean;
+  };
+
+  lineChart: {
+    data: {
+      usersData: CommitActivity[];
+      points: LineChartItem[];
+    };
     loading: boolean;
     error: boolean;
   };
@@ -28,7 +41,19 @@ const initialState: DashboardSlice = {
   },
 
   graphsStats: {
-    data: {},
+    data: {
+      pieChart:null,
+      doughnutChart:null
+    },
+    loading: false,
+    error: false,
+  },
+
+  lineChart: {
+    data: {
+      points:[],
+      usersData:[]
+    },
     loading: false,
     error: false,
   },
@@ -57,7 +82,6 @@ const dashboardSlice = createSlice({
       state.summaryStats.error = true;
     },
 
-
     //graph stats
     dashboardGraphRequest: (state) => {
       state.graphsStats.loading = true;
@@ -67,6 +91,17 @@ const dashboardSlice = createSlice({
     },
     dashboardGraphsFailure: (state) => {
       state.graphsStats.error = true;
+    },
+
+    //Line chart data
+    dashboardLineChartRequest: (state) => {
+      state.lineChart.loading = true;
+    },
+    dashboardLineChartSuccess: (state, action) => {
+      state.lineChart.data = action.payload;
+    },
+    dashboardLineChartFailure: (state) => {
+      state.lineChart.error = true;
     },
   },
 });
@@ -84,6 +119,10 @@ export const {
   //graphsStats
   dashboardGraphRequest,
   dashboardGraphsSuccess,
-  dashboardGraphsFailure
+  dashboardGraphsFailure,
 
+  //lineCHart
+  dashboardLineChartRequest,
+  dashboardLineChartSuccess,
+  dashboardLineChartFailure,
 } = dashboardSlice.actions;

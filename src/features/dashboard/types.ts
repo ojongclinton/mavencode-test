@@ -5,7 +5,6 @@ export type SummaryStat = {
   name: string;
 };
 
-
 export interface ChartDataItem {
   name: string;
   value: number;
@@ -17,3 +16,14 @@ export interface DoughnutAndPieChartData {
   colors: string[];
 }
 
+export interface LineChartItem {
+  name: string;
+  Purchases: number;
+}
+
+export interface CommitActivity {
+  avatarUrl?: string;
+  name: string;
+  commit: string;
+  date: string;
+}
