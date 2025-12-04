@@ -77,6 +77,7 @@ const dashboardSlice = createSlice({
     },
     dashboardSummaryStatsSuccess: (state, action) => {
       state.summaryStats.data = action.payload;
+      state.summaryStats.loading = false
     },
     dashboardSummaryStatsFailure: (state) => {
       state.summaryStats.error = true;
@@ -99,6 +100,7 @@ const dashboardSlice = createSlice({
     },
     dashboardLineChartSuccess: (state, action) => {
       state.lineChart.data = action.payload;
+      state.lineChart.loading = false;
     },
     dashboardLineChartFailure: (state) => {
       state.lineChart.error = true;

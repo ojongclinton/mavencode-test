@@ -9,8 +9,14 @@ import {
   dashboardGraphsFailure,
   dashboardLineChartSuccess,
   dashboardLineChartFailure,
+  dashboardGraphRequest,
+  dashboardLineChartRequest,
 } from "./dashboardSlice";
-import { getFakeChartGraphsStats, getFakeLinearChartData, getFakeSummaryStats } from "../mockApi";
+import {
+  getFakeChartGraphsStats,
+  getFakeLinearChartData,
+  getFakeSummaryStats,
+} from "../mockApi";
 
 function* fetchDashboardSummaryStatsSaga(): Generator<any, void, any> {
   try {
@@ -24,8 +30,6 @@ function* fetchDashboardSummaryStatsSaga(): Generator<any, void, any> {
 function* fetchDashboardgraphsSaga(): Generator<any, void, any> {
   try {
     const stats = yield call(getFakeChartGraphsStats);
-    console.log("them stats")
-    console.log(stats)
     yield put(dashboardGraphsSuccess(stats));
   } catch (e) {
     yield put(dashboardGraphsFailure());
@@ -53,9 +57,10 @@ function* fetchAllDashboardSaga() {
 
 export function* watchDashboard() {
   yield takeLatest(dahsboardAllRequest.type, fetchAllDashboardSaga);
-
   yield takeLatest(
     dashboardSummaryStatsRequest.type,
     fetchDashboardSummaryStatsSaga
   );
+  yield takeLatest(dashboardGraphRequest.type, fetchDashboardgraphsSaga);
+  yield takeLatest(dashboardLineChartRequest.type, fetchDashboardLineChartSaga);
 }
