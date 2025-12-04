@@ -96,7 +96,7 @@ const UserNotifications = () => {
 
   return (
     <Popover className="relative">
-      {({ open }) => (
+      {({  }) => (
         <>
           <Popover.Button className="relative p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors">
             <FiBell className="w-4 h-4 cursor-pointer" />
@@ -115,7 +115,7 @@ const UserNotifications = () => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 mt-2 w-96 origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Popover.Panel className="absolute -right-10 lg:right-0 z-10 mt-2 w-80 lg:w-96 origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">
