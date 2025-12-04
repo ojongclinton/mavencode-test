@@ -9,14 +9,26 @@ interface DashboardSlice {
     error: boolean;
     data: any;
   };
+
+  graphsStats: {
+    data: any;
+    loading: boolean;
+    error: boolean;
+  };
 }
 
-const initialState:DashboardSlice = {
+const initialState: DashboardSlice = {
   loading: false,
   error: null,
   stats: {},
   summaryStats: {
     data: [],
+    loading: false,
+    error: false,
+  },
+
+  graphsStats: {
+    data: {},
     loading: false,
     error: false,
   },
@@ -44,6 +56,18 @@ const dashboardSlice = createSlice({
     dashboardSummaryStatsFailure: (state) => {
       state.summaryStats.error = true;
     },
+
+
+    //graph stats
+    dashboardGraphRequest: (state) => {
+      state.graphsStats.loading = true;
+    },
+    dashboardGraphsSuccess: (state, action) => {
+      state.graphsStats.data = action.payload;
+    },
+    dashboardGraphsFailure: (state) => {
+      state.graphsStats.error = true;
+    },
   },
 });
 
@@ -56,4 +80,10 @@ export const {
   dashboardSummaryStatsRequest,
   dashboardSummaryStatsSuccess,
   dashboardSummaryStatsFailure,
+
+  //graphsStats
+  dashboardGraphRequest,
+  dashboardGraphsSuccess,
+  dashboardGraphsFailure
+
 } = dashboardSlice.actions;

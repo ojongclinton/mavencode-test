@@ -6,6 +6,11 @@ import { dahsboardAllRequest } from "./dashboardSlice";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import type { SummaryStat } from "./types";
+import { FiTrash } from "react-icons/fi";
+import InitialsAvatar from "../../components/InitialsAvatar";
+import TablerLineChart from "./LineChart";
+import DoughnutChartExample from "./DoughnutChart";
+import FourSegmentPieChart from "./PieChart";
 
 function DashboardPage() {
   const dashboardStuffs = useAppSelector((state) => state.dashboard);
@@ -24,6 +29,16 @@ function DashboardPage() {
           <TopAppBar />
           {/*Quick Stats summaries*/}
           <DashboardStatsSummaries />
+
+          {/*Graphs sections*/}
+          <div className="grid grid-cols-12 gap-2 my-10 p-4">
+            <div className="col-span-6">
+              <DevelopmentActivity />
+            </div>
+            <div className="col-span-6">
+              <PieCharts />
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -48,7 +63,7 @@ const DashboardStatsSummaries = () => {
   const followers: SummaryStat = allSummaryStats.find(
     (s: SummaryStat) => s.code === "followers"
   );
-  const daily_earnings: SummaryStat = allSummaryStats.find(
+  const daily_earnings = allSummaryStats.find(
     (s: SummaryStat) => s.code === "daily_earnings"
   );
   const products: SummaryStat = allSummaryStats.find(
@@ -173,6 +188,120 @@ const DashboardLoading = () => {
         </div>
       </div>
       <div className="w-full h-15 bg-gray-100 animate-pulse border-b border-gray-200"></div>
+    </div>
+  );
+};
+
+const DevelopmentActivity = () => {
+  return (
+    <div className="bg-white border border-gray-200">
+      <div className="border-b border-gray-200 p-4 text-gray-600">
+        <p>Development Activity</p>
+      </div>
+      <div>
+        <TablerLineChart />
+      </div>
+      <div className="w-full">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b border-gray-300">
+              <th className="text-sm font-normal text-left py-2 text-gray-500 px-4">
+                USER
+              </th>
+              <th className="text-sm font-normal text-left py-2 text-gray-500">
+                COMMIT
+              </th>
+              <th className="text-sm font-normal text-left py-2 text-gray-500">
+                DATE
+              </th>
+              <th className="text-sm font-normal text-left py-2 px-4"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr className="border-b border-gray-300">
+              <td className="py-4 px-4">
+                <div className="flex gap-4 items-center">
+                  <InitialsAvatar fullName="William Clinton" />
+                  <p className="text-gray-600">Ronald Bradley</p>
+                </div>
+              </td>
+              <td className="py-2 text-gray-600">Initial commit</td>
+              <td className="py-2 text-gray-600">May 6 2018</td>
+              <td className="py-2 px-4">
+                <FiTrash className="text-gray-400" />
+              </td>
+            </tr>
+            <tr className="border-b border-gray-300">
+              <td className="py-4 px-4">
+                <div className="flex gap-4 items-center">
+                  <InitialsAvatar fullName="William Clinton" />
+                  <p className="text-gray-700">Russel Gibson</p>
+                </div>
+              </td>
+              <td className="py-2 text-gray-600">Main Structure</td>
+              <td className="py-2 text-gray-600">May 6 2018</td>
+              <td className="py-2 px-4">
+                <FiTrash className="text-gray-400" />
+              </td>
+            </tr>
+            <tr className="border-b border-gray-300">
+              <td className="py-4 px-4">
+                <div className="flex gap-4 items-center">
+                  <InitialsAvatar fullName="William Clinton" />
+                  <p className="text-gray-600">Beverly Armstrong</p>
+                </div>
+              </td>
+              <td className="py-2 text-gray-600">Left sidebar adjustments</td>
+              <td className="py-2 text-gray-600">May 6 2018</td>
+              <td className="py-2 px-4">
+                <FiTrash className="text-gray-400" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+const PieCharts = () => {
+  return (
+    <div>
+      <div className="bg-blue-200 p-4 border border-gray-200">
+        <p className="text-blue-700">
+          <span className="font-semibold ">Read our documentation</span> with
+          code samples
+        </p>
+      </div>
+      <div className="grid grid-cols-2 my-3 gap-5">
+        <div className="bg-white border border-gray-200">
+          <div className="border-b border-gray-200 p-3">
+            <p>Chart Title</p>
+          </div>
+          <div>
+            <DoughnutChartExample />
+          </div>
+        </div>
+        <div className="bg-white border border-gray-200">
+          <div className="border-b border-gray-200 p-3">
+            <p>Chart Title</p>
+          </div>
+          <FourSegmentPieChart />
+        </div>
+        <div className="bg-white border border-gray-200">
+          <div className="border-b border-gray-200 p-3">
+            <p>Chart Title</p>
+          </div>
+          <FourSegmentPieChart />
+        </div>
+        <div className="bg-white border border-gray-200">
+          <div className="border-b border-gray-200 p-3">
+            <p>Chart Title</p>
+          </div>
+          <DoughnutChartExample />
+        </div>
+      </div>
     </div>
   );
 };
