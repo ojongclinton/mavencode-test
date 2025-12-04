@@ -1,13 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { UserType } from "./types";
+
+interface authState {
+  isAuthenticated: boolean;
+  user: UserType | null;
+  loading: boolean;
+  error: any;
+}
+
+const userStillLoggedIn = () => {
+  let userObject = localStorage.getItem("LoggedInUser");
+
+  if (userObject) {
+    const realUser = JSON.parse(userObject);
+    if (new Date(realUser.expireAt) > new Date()) {
+      return realUser;
+    } else {
+      localStorage.removeItem("LoggedInUser");
+      return null;
+    }
+  }
+  return null;
+};
+const loggedUser = userStillLoggedIn();
+
+let initialState: authState = {
+  isAuthenticated: Boolean(loggedUser),
+  user: loggedUser,
+  loading: false,
+  error: null,
+};
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    isAuthenticated: false,
-    loading: false,
-    error: null,
-    user: null,
-  },
+  initialState,
   reducers: {
     loginRequest: (state) => {
       state.loading = true;
@@ -22,6 +48,7 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
     logout: (state) => {
+      localStorage.removeItem("LoggedInUser");
       state.isAuthenticated = false;
       state.user = null;
     },
@@ -29,4 +56,5 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { loginRequest, logout, loginSuccess, loginFailure } = authSlice.actions;
+export const { loginRequest, logout, loginSuccess, loginFailure } =
+  authSlice.actions;

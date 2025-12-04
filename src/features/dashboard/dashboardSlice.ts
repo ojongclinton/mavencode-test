@@ -1,28 +1,59 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface DashboardSlice {
+  loading: boolean;
+  error: any;
+  stats: any;
+  summaryStats: {
+    loading: boolean;
+    error: boolean;
+    data: any;
+  };
+}
+
+const initialState:DashboardSlice = {
+  loading: false,
+  error: null,
+  stats: {},
+  summaryStats: {
+    data: [],
+    loading: false,
+    error: false,
+  },
+};
 
 const dashboardSlice = createSlice({
   name: "dashboard",
-  initialState: { 
-      loading: false,
-      error: null,
-      stats: {}
-   },
+  initialState,
   reducers: {
-    dahsboardStatsRequest: (state) => {
+    dahsboardAllRequest: (state) => {
       state.loading = true;
     },
-    fetchDashboardStatsSuccess: (state, action) => {
+
+    dashboardAllRequestSuccess: (state) => {
       state.loading = false;
-      state.stats = action.payload;
     },
-    fetchDashboardStatsFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+
+    //Summary stats
+    dashboardSummaryStatsRequest: (state) => {
+      state.summaryStats.loading = true;
+    },
+    dashboardSummaryStatsSuccess: (state, action) => {
+      state.summaryStats.data = action.payload;
+    },
+    dashboardSummaryStatsFailure: (state) => {
+      state.summaryStats.error = true;
     },
   },
 });
 
-
 export default dashboardSlice.reducer;
-export const { fetchDashboardStatsFailure, fetchDashboardStatsSuccess,dahsboardStatsRequest } = dashboardSlice.actions;
+export const {
+  dahsboardAllRequest,
+  dashboardAllRequestSuccess,
+
+  //Summary stats
+  dashboardSummaryStatsRequest,
+  dashboardSummaryStatsSuccess,
+  dashboardSummaryStatsFailure,
+} = dashboardSlice.actions;
