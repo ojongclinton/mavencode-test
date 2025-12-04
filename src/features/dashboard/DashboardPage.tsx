@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import TopAppBar from "../../components/TopAppBar";
 import { dahsboardAllRequest } from "./dashboardSlice";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../app/hooks";
 import {
   FiBox,
   FiCalendar,
@@ -51,7 +50,6 @@ const dashBoardTabs = [
 ];
 
 function DashboardPage() {
-  const dashboardStuffs = useAppSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(dashBoardTabs[0]);
 
@@ -61,9 +59,6 @@ function DashboardPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {dashboardStuffs.loading ? (
-        <DashboardLoading />
-      ) : (
         <>
           <TopAppBar />
           <div className="border-b border-gray-200 bg-white">
@@ -85,7 +80,7 @@ function DashboardPage() {
             <p>Documentation component</p>
           )}
         </>
-      )}
+      {/* )} */}
     </div>
   );
 }
@@ -97,31 +92,13 @@ const DashboardHome = () => {
     <div className="max-w-7xl mx-auto">
       <DashboardStatsSummaries />
       <div className="grid grid-cols-12 gap-2 my-10 p-4">
-        <div className="col-span-6">
+        <div className="col-span-12 lg:col-span-6">
           <DevelopmentActivity />
         </div>
-        <div className="col-span-6">
+        <div className="col-span-12 lg:col-span-6">
           <PieCharts />
         </div>
       </div>
-    </div>
-  );
-};
-
-const DashboardLoading = () => {
-  return (
-    <div>
-      <div className="w-full h-20 bg-gray-100 animate-pulse border-b border-gray-200 p-3">
-        <div className="flex justify-between">
-          <div className="h-10 w-[200px] bg-gray-200 rounded-md"></div>
-          <div className="flex gap-4">
-            <div className="h-10 w-[50px] bg-gray-200 rounded-md"></div>
-            <div className="h-10 w-10 bg-gray-200 rounded-full"></div>
-            <div className="h-10 w-[200px] bg-gray-200 rounded-md"></div>
-          </div>
-        </div>
-      </div>
-      <div className="w-full h-15 bg-gray-100 animate-pulse border-b border-gray-200"></div>
     </div>
   );
 };
