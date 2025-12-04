@@ -30,7 +30,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 font-sans">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-4 sm:mx-auto">
         <div className="text-center mb-6">
-          <FaUserAlt className="mx-auto text-blue-600 text-4xl mb-3" />{" "}
+          <FaUserAlt className="mx-auto text-blue-400 text-4xl mb-3" />{" "}
           <h1 className="text-3xl font-bold text-gray-800">Sign In</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -80,7 +80,7 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             disabled={loading}
           >
             {loading ? "Signing In..." : "Sign In"}
