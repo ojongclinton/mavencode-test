@@ -111,6 +111,11 @@ const dashboardSlice = createSlice({
     dashboardLineChartFailure: (state) => {
       state.lineChart.error = true;
     },
+
+    dashboardSetActivityUserList : (state,action) =>{
+      state.lineChart.data.usersData = action.payload
+    }
+
   },
 });
 
@@ -133,4 +138,5 @@ export const {
   dashboardLineChartRequest,
   dashboardLineChartSuccess,
   dashboardLineChartFailure,
+  dashboardSetActivityUserList
 } = dashboardSlice.actions;

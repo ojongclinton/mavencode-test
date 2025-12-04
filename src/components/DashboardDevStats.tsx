@@ -1,4 +1,4 @@
-import { FiTrash } from "react-icons/fi";
+import { FiInbox, FiTrash } from "react-icons/fi";
 import { useAppSelector } from "../app/hooks";
 import TablerMinimalLineChart from "../features/dashboard/LineChart";
 import type { CommitActivity } from "../features/dashboard/types";
@@ -7,7 +7,10 @@ import DoughnutChart from "../features/dashboard/DoughnutChart";
 import PieChart from "../features/dashboard/PieChart";
 import { IoReload } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { dashboardLineChartRequest } from "../features/dashboard/dashboardSlice";
+import {
+  dashboardLineChartRequest,
+  dashboardSetActivityUserList,
+} from "../features/dashboard/dashboardSlice";
 import { classNames } from "../helpers";
 
 export const DevelopmentActivity = () => {
@@ -21,6 +24,12 @@ export const DevelopmentActivity = () => {
   const isLoading = useAppSelector(
     (state) => state.dashboard.lineChart.loading
   );
+
+  const handleDelete = (name: string) => {
+    dispatch(
+      dashboardSetActivityUserList(commitUsers.filter((c) => c.name !== name))
+    );
+  };
 
   const handleRefreshClick = () => {
     if (isLoading) return;
@@ -44,7 +53,7 @@ export const DevelopmentActivity = () => {
         <TablerMinimalLineChart chartData={lineChartData} />
       </div>
       <div className="w-full">
-        {!isLoading && (
+        {!isLoading && commitUsers.length > 0 && (
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b border-gray-300">
@@ -74,10 +83,17 @@ export const DevelopmentActivity = () => {
                         <p className="text-gray-600">{u.name}</p>
                       </div>
                     </td>
-                    <td className="py-2 text-gray-600 hidden md:block">{u.commit}</td>
+                    <td className="py-2 text-gray-600 hidden md:block">
+                      {u.commit}
+                    </td>
                     <td className="py-2 text-gray-600">{u.date}</td>
-                    <td className="mt-5 px-4 hidden md:block">
-                      <FiTrash className="text-gray-400" />
+                    <td className="mt-5 px-4 hidden md:block cursor-pointer ">
+                      <FiTrash
+                        className="text-gray-400 hover:text-red-300"
+                        onClick={() => {
+                          handleDelete(u.name);
+                        }}
+                      />
                     </td>
                   </tr>
                 );
@@ -85,6 +101,18 @@ export const DevelopmentActivity = () => {
             </tbody>
           </table>
         )}
+        {!isLoading && commitUsers.length === 0 && (
+          <div className="w-full flex flex-col items-center justify-center py-10 text-center text-gray-500">
+            <div className="p-4 bg-gray-100 rounded-full mb-4">
+              <FiInbox size={28} className="text-gray-400" />
+            </div>
+            <p className="font-semibold text-gray-600">No records found</p>
+            <p className="text-sm text-gray-400 mt-1">
+              There’s nothing to display here yet
+            </p>
+          </div>
+        )}
+
         {isLoading && (
           <table className="w-full border-collapse animate-pulse">
             <thead>
